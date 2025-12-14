@@ -3,6 +3,7 @@ from database import db
 from models.user import User
 from models.task import Task
 
+
 app = Flask(__name__)
 
 app.config["SECRET_KEY"] = "secret_key_inatel"
@@ -25,7 +26,7 @@ def create_user():
         db.session.commit()
         return jsonify({"message": "Usúario criado com sucesso!"}), 201
     
-    return jsonify({"message": "Dados inválidos!"}), 400
+    return jsonify({"message": "Dados inválidos"}), 400
 
 
 
@@ -33,7 +34,7 @@ def create_user():
 @app.route("/users", methods=["GET"])
 def get_users():
     users = User.query.all()
-    users_list = [{"id": user.id, "username": user.username, "email": user.email} for user in users]
+    users_list = [ user.to_dict() for user in users]
     return jsonify(users_list), 200
 
 
@@ -44,12 +45,11 @@ def get_user(user_id):
     user = User.query.get(user_id)
 
     if user:
-        user_data = {"id": user.id, "username": user.username, "email": user.email}
+        user_data = user.to_dict()
         return jsonify(user_data), 200
     
-    return jsonify({"message": "Usuário não encontrado!"}), 404
+    return jsonify({"message": "Usuário não encontrado"}), 404
     
-
 
 
 #Rota de criação de tarefa ------------------------------------------------------------------------------------------------------------
@@ -67,7 +67,7 @@ def create_task():
         db.session.commit()
         return jsonify({"message": "Tarefa criada com sucesso!"}), 201
     
-    return jsonify({"message": "Dados inválidos!"}), 400
+    return jsonify({"message": "Dados inválidos"}), 400
 
 
 
@@ -75,7 +75,7 @@ def create_task():
 @app.route("/tasks/<int:user_id>", methods=["GET"])
 def get_tasks(user_id):
     tasks = Task.query.filter_by(user_id=user_id).all()
-    tasks_list = [{"id": task.id, "title": task.title, "description": task.description, "completed": task.completed} for task in tasks]
+    tasks_list = [task.to_dict() for task in tasks]
     return jsonify(tasks_list), 200
     
 
@@ -86,13 +86,85 @@ def get_task(task_id):
     task = Task.query.get(task_id)
 
     if task:
-        task_data = {"id": task.id, "title": task.title, "description": task.description, "completed": task.completed, "user_id": task.user_id}
+        task_data = task.to_dict()
         return jsonify(task_data), 200
     
-    return jsonify({"message": "Tarefa não encontrada!"}), 404
+    return jsonify({"message": "Tarefa não encontrada"}), 404
 
 
-    
+
+#Rota para atualizar dados do usuário ------------------------------------------------------------------------------------------------------------
+@app.route("/user/<int:user_id>", methods=["PATCH"])
+def update_user(user_id):
+    user = User.query.get(user_id)
+
+    if user:
+        data = request.get_json()
+        username = data.get("username")
+        email = data.get("email")
+
+        if username:
+            user.username = username
+        if email:
+            user.email = email
+
+        db.session.commit()
+        return jsonify({"message": "Usuário atualizado com sucesso!"}), 200
+
+    return jsonify({"message": "Usuário não encontrado"}), 404
+
+
+
+#Rota para atualizar dados de uma tarefa ------------------------------------------------------------------------------------------------------------
+@app.route("/task/<int:task_id>", methods=["PATCH"])
+def update_task(task_id):
+    task = Task.query.get(task_id)
+
+    if task:
+        data = request.get_json()
+        title = data.get("title")
+        description = data.get("description")
+        completed = data.get("completed")
+
+        if title:
+            task.title = title
+        if description:
+            task.description = description
+        if completed is not None:
+            task.completed = completed
+
+        db.session.commit()
+        return jsonify({"message": "Tarefa atualizada com sucesso!"}), 200
+
+    return jsonify({"message": "Tarefa não encontrada"}), 404
+
+
+
+#Rota para deletar um usuário ------------------------------------------------------------------------------------------------------------
+@app.route("/user/<int:user_id>", methods=["DELETE"])
+def delete_user(user_id):
+    user = User.query.get(user_id)
+
+    if user:
+        db.session.delete(user)
+        db.session.commit()
+        return jsonify({"message": "Usuário deletado com sucesso!"}), 200
+
+    return jsonify({"message": "Usuário não encontrado"}), 404
+
+
+
+#Rota para deletar uma tarefa ------------------------------------------------------------------------------------------------------------
+@app.route("/task/<int:task_id>", methods=["DELETE"])
+def delete_task(task_id):
+    task = Task.query.get(task_id)
+
+    if task:
+        db.session.delete(task)
+        db.session.commit()
+        return jsonify({"message": "Tarefa deletada com sucesso!"}), 200
+
+    return jsonify({"message": "Tarefa não encontrada"}), 404
 
 
 
