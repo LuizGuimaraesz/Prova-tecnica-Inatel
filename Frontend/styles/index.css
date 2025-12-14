@@ -25,7 +25,9 @@ h2 {
   color: #333;
 }
 
-#create-user {
+#create-user,
+#back-to-users,
+#create-task {
   margin-block: 25px;
 
   button {
@@ -64,7 +66,8 @@ button {
   padding: 10px;
 }
 
-.button-user {
+.button-user,
+.button-task {
   background: #4a88f3;
   color: #fff;
   font-size: 16px;
@@ -105,6 +108,13 @@ li {
     width: 600px;
     font-size: 18px;
   }
+}
+
+.user-actions,
+.task-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .modal {
@@ -164,4 +174,8 @@ li {
 .disabled_scroll {
   pointer-events: none; /* bloqueia cliques */
   user-select: none;
+}
+
+a {
+  text-decoration: none;
 }

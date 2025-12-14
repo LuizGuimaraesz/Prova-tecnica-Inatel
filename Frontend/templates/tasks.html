@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerenciador de Tarefas</title>
+    <link rel="stylesheet" href="../styles/index.css" />
+  </head>
+  <body>
+    <section id="page">
+      <header>
+        <h1 id="tasks-header">Tarefas do Usuário</h1>
+      </header>
+
+      <main>
+        <div id="back-to-users">
+          <button onclick="window.location.href='index.html'">
+            ← Voltar para Usuários
+          </button>
+        </div>
+
+        <div id="create-task">
+          <button onclick="open_create_tela()">+ Criar nova tarefa</button>
+        </div>
+
+        <h2>Lista de Tarefas:</h2>
+        <ul id="task-list"></ul>
+      </main>
+    </section>
+
+    <div id="modal-create-task" class="modal hidden">
+      <div class="modal-content">
+        <h2>Criar Nova Tarefa</h2>
+        <form id="create-task-form">
+          <label for="create-title">Título/Tarefa:</label>
+          <input
+            type="text"
+            id="create-title"
+            name="title"
+            placeholder="Ex: Pagar contas"
+            required
+          />
+
+          <label for="create-description">Descrição:</label>
+          <input
+            type="text"
+            id="create-description"
+            name="description"
+            placeholder="Detalhes da tarefa..."
+            required
+          />
+
+          <div class="button-group">
+            <button type="submit" class="button-user update-button">
+              Salvar
+            </button>
+            <button
+              type="button"
+              class="button-user cancel-button"
+              onclick="close_tela('modal-create-task'); clean_task_form()"
+            >
+              Cancelar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="modal-edit-task" class="modal hidden">
+      <div class="modal-content">
+        <h2>Editar Tarefa</h2>
+        <form id="update-task-form">
+          <input type="hidden" id="edit-task-id" />
+
+          <label for="edit-title">Título/Tarefa:</label>
+          <input
+            type="text"
+            id="edit-title"
+            name="title"
+            placeholder="Título"
+            required
+          />
+
+          <label for="edit-description">Descrição:</label>
+          <input
+            type="text"
+            id="edit-description"
+            name="description"
+            placeholder="Descrição"
+            required
+          />
+
+          <label
+            for="edit-completed"
+            style="display: block; width: 100%; margin-top: 10px"
+          >
+            <input
+              type="checkbox"
+              id="edit-completed"
+              name="completed"
+              style="width: auto; margin-right: 10px"
+            />
+            Tarefa Completa
+          </label>
+
+          <div class="button-group">
+            <button type="submit" class="button-user update-button">
+              Salvar Alterações
+            </button>
+            <button
+              type="button"
+              class="button-user cancel-button"
+              onclick="close_tela('modal-edit-task')"
+            >
+              Cancelar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="../scripts/tasks.js"></script>
+  </body>
+</html>

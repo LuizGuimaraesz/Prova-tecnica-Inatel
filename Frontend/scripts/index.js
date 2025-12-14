@@ -148,5 +148,10 @@ function clean_form(meodalId) {
   document.getElementById("create-email").value = "";
 }
 
+// Função para ver tarefas de um usuário
+function viewTasks(userId) {
+  window.location.href = `tasks.html?user_id=${userId}`;
+}
+
 // Carregar a lista de usuários ao carregar a página
 load_users();
