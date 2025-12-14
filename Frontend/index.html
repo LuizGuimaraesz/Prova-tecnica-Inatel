@@ -3,25 +3,102 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tasks</title>
+    <title>Gerenciador de tarefas</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <section id="main">
+    <section id="page">
       <header>
         <h1>Gerenciador de Tarefas</h1>
       </header>
 
       <main>
-        <section id="users">
-          <h2 id="create-user">Criar usúario</h2>
-          <h2>Usuários:</h2>
-          <ul id="user-list">
-            <!-- Lista de usuários será inserida aqui -->
-          </ul>
-        </section>
+        <div id="create-user">
+          <button onclick="open_create_tela()">+ Criar novo usúario</button>
+        </div>
+
+        <h2>Usuários:</h2>
+        <ul id="user-list">
+          <!-- Lista de usuários será inserida aqui -->
+        </ul>
       </main>
     </section>
+
+    <div id="modal-create" class="modal hidden">
+      <div class="modal-content">
+        <h2>Criar Novo Usuário</h2>
+        <form id="create-user-form">
+          <label for="create-nome">Nome:</label>
+          <input
+            type="text"
+            id="create-nome"
+            name="nome"
+            placeholder="Nome"
+            required
+          />
+
+          <label for="create-email">E-mail:</label>
+          <input
+            type="email"
+            id="create-email"
+            name="email"
+            placeholder="E-mail"
+            required
+          />
+
+          <div class="button-group">
+            <button type="submit" class="button-user update-button">
+              Salvar
+            </button>
+            <button
+              type="button"
+              class="button-user cancel-button"
+              onclick="close_tela('modal-create'); clean_form('create-nome', 'create-email')"
+            >
+              Cancelar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="modal-edit" class="modal hidden">
+      <div class="modal-content">
+        <h2>Editar Usuário</h2>
+        <form id="update-user-form">
+          <input type="hidden" id="edit-user-id" />
+
+          <label for="edit-nome">Nome:</label>
+          <input
+            type="text"
+            id="edit-nome"
+            name="username"
+            placeholder="Nome"
+            required
+          />
+
+          <label for="edit-email">E-mail:</label>
+          <input
+            type="email"
+            id="edit-email"
+            name="email"
+            placeholder="E-mail"
+            required
+          />
+
+          <div class="button-group">
+            <button type="submit" class="button-user">Salvar Alterações</button>
+            <button
+              type="button"
+              class="button-user"
+              onclick="close_tela('modal-edit')"
+            >
+              Cancelar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
     <script src="scripts.js"></script>
   </body>
 </html>
