@@ -42,7 +42,6 @@ O frontend consome os dados da API.
 
 ```bash
 git clone https://github.com/seu-usuario/Prova-tecnica-Inatel.git
-cd Prova-tecnica-Inatel
 ```
 
 ---

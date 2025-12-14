@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 from database import db
 from models.user import User
 from models.task import Task
+from flask_cors import CORS
 
 
 app = Flask(__name__)
@@ -10,6 +11,8 @@ app.config["SECRET_KEY"] = "secret_key_inatel"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 
 db.init_app(app)
+CORS(app)
+
 
 
 
