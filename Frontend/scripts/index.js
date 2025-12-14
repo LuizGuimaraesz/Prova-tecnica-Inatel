@@ -101,17 +101,6 @@ async function deleteUser(id) {
 }
 
 // Funções para abrir e fechar os modais do usuário
-function open_create_tela() {
-  const tela = document.getElementById("modal-create");
-  const main = document.getElementsByTagName("main")[0];
-
-  tela.classList.remove("hidden");
-
-  document.body.classList.add("blur-fundo");
-  main.classList.add("disabled_scroll");
-
-  document.body.style.overflow = "hidden";
-}
 
 function open_edit_tela(user) {
   const modalId = "modal-edit";
@@ -130,20 +119,7 @@ function open_edit_tela(user) {
   document.body.style.overflow = "hidden";
 }
 
-function close_tela(modalId) {
-  const tela = document.getElementById(modalId);
-  const main = document.getElementsByTagName("main")[0];
-
-  tela.classList.add("hidden");
-
-  document.body.classList.remove("blur-fundo");
-  main.classList.remove("disabled_scroll");
-
-  document.body.style.overflow = "auto";
-}
-
-// Função para limpar o formulário de criação de usuário
-function clean_form(meodalId) {
+function clean_form() {
   document.getElementById("create-nome").value = "";
   document.getElementById("create-email").value = "";
 }

@@ -20,7 +20,9 @@
         </div>
 
         <div id="create-task">
-          <button onclick="open_create_tela()">+ Criar nova tarefa</button>
+          <button onclick="open_create_tela('modal-create-task')">
+            + Criar nova tarefa
+          </button>
         </div>
 
         <h2>Lista de Tarefas:</h2>
@@ -32,12 +34,12 @@
       <div class="modal-content">
         <h2>Criar Nova Tarefa</h2>
         <form id="create-task-form">
-          <label for="create-title">Título/Tarefa:</label>
+          <label for="create-title">Título:</label>
           <input
             type="text"
             id="create-title"
             name="title"
-            placeholder="Ex: Pagar contas"
+            placeholder="Titulo da tarefa"
             required
           />
 
@@ -46,7 +48,7 @@
             type="text"
             id="create-description"
             name="description"
-            placeholder="Detalhes da tarefa..."
+            placeholder="Descrição da tarefa"
             required
           />
 
@@ -57,7 +59,8 @@
             <button
               type="button"
               class="button-user cancel-button"
-              onclick="close_tela('modal-create-task'); clean_task_form()"
+              onclick="close_tela('modal-create-task');
+              clean_task_form()"
             >
               Cancelar
             </button>
@@ -72,7 +75,7 @@
         <form id="update-task-form">
           <input type="hidden" id="edit-task-id" />
 
-          <label for="edit-title">Título/Tarefa:</label>
+          <label for="edit-title">Título:</label>
           <input
             type="text"
             id="edit-title"
@@ -92,17 +95,22 @@
 
           <label
             for="edit-completed"
-            style="display: block; width: 100%; margin-top: 10px"
+            style="
+              align-self: flex-start;
+              margin-top: 10px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            "
           >
             <input
               type="checkbox"
               id="edit-completed"
               name="completed"
-              style="width: auto; margin-right: 10px"
+              style="width: auto; margin: 0; padding: 0"
             />
-            Tarefa Completa
+            Tarefa Concluída
           </label>
-
           <div class="button-group">
             <button type="submit" class="button-user update-button">
               Salvar Alterações
@@ -118,7 +126,7 @@
         </form>
       </div>
     </div>
-
+    <script src="../scripts/uttils.js"></script>
     <script src="../scripts/tasks.js"></script>
   </body>
 </html>
