@@ -1,15 +1,4 @@
-function close_tela(modalId) {
-  const tela = document.getElementById(modalId);
-  const main = document.getElementsByTagName("main")[0];
-
-  tela.classList.add("hidden");
-
-  document.body.classList.remove("blur-fundo");
-  main.classList.remove("disabled_scroll");
-
-  document.body.style.overflow = "auto";
-}
-
+// Funções para abrir e fechar modais
 function open_create_tela(modalId) {
   const tela = document.getElementById(modalId);
   const main = document.getElementsByTagName("main")[0];
@@ -20,4 +9,16 @@ function open_create_tela(modalId) {
   main.classList.add("disabled_scroll");
 
   document.body.style.overflow = "hidden";
+}
+
+function close_tela(modalId) {
+  const tela = document.getElementById(modalId);
+  const main = document.getElementsByTagName("main")[0];
+
+  tela.classList.add("hidden");
+
+  document.body.classList.remove("blur-fundo");
+  main.classList.remove("disabled_scroll");
+
+  document.body.style.overflow = "auto";
 }

@@ -5,6 +5,7 @@ from models.task import Task
 from flask_cors import CORS
 
 
+#Configurações iniciais do Flask e do banco de dados ------------------------------------------------------
 app = Flask(__name__)
 
 app.config["SECRET_KEY"] = "secret_key_inatel"
@@ -12,7 +13,6 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 
 db.init_app(app)
 CORS(app)
-
 
 
 
@@ -33,7 +33,7 @@ def create_user():
 
 
 
-#Rota para listar dados de todos os usuários ------------------------------------------------------------------------------------------------------------
+#Rota para listar dados de todos os usuários -------------------------------------------------------------
 @app.route("/users", methods=["GET"])
 def get_users():
     users = User.query.all()
@@ -42,7 +42,7 @@ def get_users():
 
 
 
-#Rota para listar dados de um usuário específico ------------------------------------------------------------------------------------------------------------
+#Rota para listar dados de um usuário específico ----------------------------------------------------------
 @app.route("/user/<int:user_id>", methods=["GET"])
 def get_user(user_id):
     user = User.query.get(user_id)
@@ -55,13 +55,13 @@ def get_user(user_id):
     
 
 
-#Rota de criação de tarefa ------------------------------------------------------------------------------------------------------------
+#Rota de criação de tarefa -------------------------------------------------------------------------------
 @app.route("/task", methods=["POST"])
 def create_task():
     data = request.get_json()
     title = data.get("title")
     description = data.get("description")
-    completed = data.get("completed")
+    completed = data.get("completed", False)
     user_id = data.get("user_id")
     new_task = Task(title=title, description=description, completed = completed, user_id=user_id)
 
@@ -74,7 +74,7 @@ def create_task():
 
 
 
-#Rota para listar tarefas de um usuário específico------------------------------------------------------------------------------------------------------------
+#Rota para listar tarefas de um usuário específico---------------------------------------------------------
 @app.route("/tasks/<int:user_id>", methods=["GET"])
 def get_tasks(user_id):
     tasks = Task.query.filter_by(user_id=user_id).all()
@@ -83,7 +83,7 @@ def get_tasks(user_id):
     
 
 
-#Rota para listar dados de uma tarefa específica ------------------------------------------------------------------------------------------------------------
+#Rota para listar dados de uma tarefa específica ----------------------------------------------------------
 @app.route("/task/<int:task_id>", methods=["GET"])
 def get_task(task_id):
     task = Task.query.get(task_id)
@@ -96,7 +96,7 @@ def get_task(task_id):
 
 
 
-#Rota para atualizar dados do usuário ------------------------------------------------------------------------------------------------------------
+#Rota para atualizar dados do usuário -----------------------------------------------------------------------
 @app.route("/user/<int:user_id>", methods=["PATCH"])
 def update_user(user_id):
     user = User.query.get(user_id)
@@ -118,7 +118,7 @@ def update_user(user_id):
 
 
 
-#Rota para atualizar dados de uma tarefa ------------------------------------------------------------------------------------------------------------
+#Rota para atualizar dados de uma tarefa -------------------------------------------------------------------
 @app.route("/task/<int:task_id>", methods=["PATCH"])
 def update_task(task_id):
     task = Task.query.get(task_id)
@@ -143,7 +143,7 @@ def update_task(task_id):
 
 
 
-#Rota para deletar um usuário ------------------------------------------------------------------------------------------------------------
+#Rota para deletar um usuário ----------------------------------------------------------------------------------
 @app.route("/user/<int:user_id>", methods=["DELETE"])
 def delete_user(user_id):
     user = User.query.get(user_id)
@@ -157,7 +157,7 @@ def delete_user(user_id):
 
 
 
-#Rota para deletar uma tarefa ------------------------------------------------------------------------------------------------------------
+#Rota para deletar uma tarefa ------------------------------------------------------------------------------------
 @app.route("/task/<int:task_id>", methods=["DELETE"])
 def delete_task(task_id):
     task = Task.query.get(task_id)
@@ -172,6 +172,5 @@ def delete_task(task_id):
 
 
 
-
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()

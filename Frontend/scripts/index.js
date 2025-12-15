@@ -1,4 +1,4 @@
-API_URL = "http://127.0.0.1:5000";
+const API_URL = "http://127.0.0.1:5000";
 
 // Evento de envio do formulário de criação de usuário
 document
@@ -33,32 +33,28 @@ async function load_users() {
   const list_users = document.getElementById("user-list");
   list_users.innerHTML = "";
 
-  console.log(data);
-
   data.forEach((user) => {
     const li = document.createElement("li");
 
-    li.innerHTML = `<strong> Nome: ${user.username}</strong>
- <strong> Email: ${user.email}</strong><br>
+    li.innerHTML = `<p><strong> Nome: </strong>${user.username}</p>
+                    <p><strong> Email: </strong> ${user.email}</p><br>
 
-<div class="user-actions">
-<button class="button-user" onclick="viewTasks(${user.id})">Ver tarefas</button>
+                    <div class="user-actions">
+                    <button class="button-user" onclick="viewTasks(${user.id})">Ver tarefas</button>
 
-<button 
-class="button-user" 
-onclick='open_edit_tela({ id: "${user.id}", username: "${user.username}", email: "${user.email}" })'
- >
-Editar
- </button>
+                    <button class="button-user" 
+                    onclick='open_edit_tela({ id: "${user.id}", username: "${user.username}", email: "${user.email}" })'>
+                    Editar
+                    </button>
 
- <button class="button-user" onclick="deleteUser(${user.id})">Excluir</button>
-                     </div>`;
+                      <button class="button-danger" onclick="deleteUser(${user.id})">Excluir</button>
+                     `;
 
     list_users.appendChild(li);
   });
 }
 
-// Evento de submissão do formulário de edição de usuário
+// Evento de envio do formulário de edição de usuário
 document
   .getElementById("update-user-form")
   .addEventListener("submit", async (e) => {
@@ -100,8 +96,7 @@ async function deleteUser(id) {
   }
 }
 
-// Funções para abrir e fechar os modais do usuário
-
+// Funções para abrir modal de edição de usuário
 function open_edit_tela(user) {
   const modalId = "modal-edit";
   const tela = document.getElementById(modalId);
@@ -129,5 +124,5 @@ function viewTasks(userId) {
   window.location.href = `tasks.html?user_id=${userId}`;
 }
 
-// Carregar a lista de usuários ao carregar a página
+// Mostrar a lista de usuários ao carregar a página
 load_users();

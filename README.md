@@ -8,8 +8,12 @@ Este repositório foi criado para armazenar um projeto feito para avaliação t�
 
 O projeto consiste em uma **API REST para gerenciamento de tarefas de usuários**.
 
-Cada usuário pode possuir várias tarefas (relacionamento **1:N**), e o sistema permite realizar as operações básicas de um CRUD:
+Cada usuário pode ter várias tarefas (relacionamento **1:N**), e o sistema permite realizar as operações básicas de um CRUD:
 
+- Criar usuários
+- Listar usuários
+- Atualizar usuários
+- Deletar usuários
 - Criar tarefas
 - Listar tarefas
 - Atualizar tarefas
@@ -26,7 +30,7 @@ O frontend consome os dados da API.
 - Python
 - Flask
 - SQLAlchemy
-- Banco de dados relacional (SQlite)
+- Banco de dados relacional (SQLite)
 
 ### Frontend
 
@@ -120,6 +124,39 @@ Após iniciar, a API estará disponível em:
 http://localhost:5000
 ```
 
-Você pode testar a API utilizando o navegador ou ferramentas como **Postman** ou **Insomnia**.
+A API pode ser testada utilizando o navegador ou ferramentas como **Postman** ou **Insomnia**.
 
 ---
+
+## 🌐 Rodando o Frontend
+
+### 8️⃣ Executar o Live Server
+
+1. Instale a extensão **Live Server** no VS Code (caso ainda não tenha).
+2. No explorador de arquivos, localize o arquivo `index.html`.
+3. Clique com o botão direito no `index.html`.
+4. Selecione **Open with Live Server**.
+
+Após iniciar, o frontend estará disponível em:
+
+```
+http://localhost:5500
+```
+
+Certifique-se de que a API está rodando em:
+
+```
+http://localhost:5000
+```
+
+## 📸 Screenshots
+
+### 👤 Usuários
+
+<img src="screenshots/users.png" width="600" alt="Lista de usuários">
+<img src="screenshots/create-user.png" width="600" alt="Criar usuário">
+
+### ✅ Tarefas
+
+<img src="screenshots/tasks.png" width="600" alt="Lista de tarefas">
+<img src="screenshots/edit-task.png" width="600" alt="Criar tarefa">

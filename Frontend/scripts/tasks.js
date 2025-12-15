@@ -1,10 +1,10 @@
-API_URL = "http://127.0.0.1:5000";
+const API_URL = "http://127.0.0.1:5000";
 
 // Obter o ID do usuário selecionado a partir da URL
 const urlParams = new URLSearchParams(window.location.search);
 const selected_id = urlParams.get("user_id");
 
-// Função para carregar e exibir a lista de tarefas do usuário selecionado
+// Função para exibir a lista de tarefas do usuário selecionado
 async function load_tasks() {
   if (!selected_id) {
     alert("Nenhum usuário selecionado.");
@@ -14,13 +14,13 @@ async function load_tasks() {
   const data = await response.json();
   const list_tasks = document.getElementById("task-list");
   list_tasks.innerHTML = "";
-  console.log(data);
+
   data.forEach((task) => {
     const li = document.createElement("li");
 
     li.innerHTML = `
-                <strong> Tarefa: ${task.title}</strong>
-                <strong> Descrição: ${task.description}</strong>
+                <p><strong> Tarefa:</strong> ${task.title}</p>
+                <p><strong> Descrição: </strong> ${task.description}</p>
                 <strong> Status: ${task.completed ? "✅" : "❌"}</strong><br>
                 
                 
@@ -35,7 +35,7 @@ async function load_tasks() {
                   >Editar</button>
                   
                   
-                  <button class="button-task" onclick="deleteTask(${
+                  <button class="button-danger" onclick="deleteTask(${
                     task.id
                   })">Excluir</button>
                 </div>  `;
@@ -44,6 +44,7 @@ async function load_tasks() {
   });
 }
 
+// Função para criar uma nova tarefa
 document
   .getElementById("create-task-form")
   .addEventListener("submit", async (e) => {
@@ -67,6 +68,7 @@ document
     }
   });
 
+// Função para abrir o modal de criação de tarefa
 function open_create_tela() {
   const tela = document.getElementById("modal-create-task");
   const main = document.getElementsByTagName("main")[0];
@@ -127,6 +129,7 @@ async function deleteTask(id) {
   }
 }
 
+// Função para abrir modal de edição de tarefa
 function open_edit_task(task) {
   const modalId = "modal-edit-task";
   const tela = document.getElementById(modalId);
@@ -136,6 +139,7 @@ function open_edit_task(task) {
 
   document.getElementById("edit-title").value = task.title;
   document.getElementById("edit-description").value = task.description;
+  document.getElementById("edit-completed").checked = task.completed;
 
   tela.classList.remove("hidden");
 
@@ -145,5 +149,5 @@ function open_edit_task(task) {
   document.body.style.overflow = "hidden";
 }
 
-// Carregar a lista de tarefas ao carregar a página
+// Mostrar a lista de tarefas ao carregar a página
 load_tasks();
