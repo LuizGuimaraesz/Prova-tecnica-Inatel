@@ -45,7 +45,7 @@ O frontend consome os dados da API.
 ### 1️⃣ Clonar o Repositório
 
 ```bash
-git clone https://github.com/seu-usuario/Prova-tecnica-Inatel.git
+git clone https://github.com/LuizGuimaraesz/Prova-tecnica-Inatel.git
 ```
 
 ---
@@ -55,7 +55,7 @@ git clone https://github.com/seu-usuario/Prova-tecnica-Inatel.git
 ### 2️⃣ Acessar a pasta do backend
 
 ```bash
-cd backend
+cd Backend
 ```
 
 ---
